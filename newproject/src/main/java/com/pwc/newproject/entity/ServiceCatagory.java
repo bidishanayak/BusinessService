@@ -33,7 +33,10 @@ public class ServiceCatagory {
 	@JoinColumn(name="catagory_type_id",referencedColumnName="id")
 	private List<ServiceCatagoryType> typeList = new ArrayList<>();
 	
-
+  // @Column(name = "tax_header_master")
+   // private Long taxheadermaster;
+	
+   
 	@Column(name = "business_Service")
 	private String businessService;
 

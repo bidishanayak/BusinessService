@@ -2,6 +2,7 @@ package com.pwc.newproject.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -59,7 +61,7 @@ public class ServiceCatagoryType {
 	@Column(name = "validFrom")
 	private Long validFrom;
 
-	@Column(name = "validTO")
+	@Column(name = "validTo")
 	private Long validTO;
 
 	@Column(name = "fromDate")
@@ -221,10 +223,28 @@ public class ServiceCatagoryType {
 
 	public Long getService_catagory_id() {
 		return service_catagory_id;
-	}
+ }
 
 	public void setService_catagory_id(Long service_catagory_id) {
 		this.service_catagory_id = service_catagory_id;
 	}
+	}
+
+	/*@Override
+	public String toString() {
+		return "ServiceCatagoryType [typeId=" + typeId + ", List=" + List + ", code=" + code
+				+ ", voucherCreationEnabled=" + voucherCreationEnabled + ", fund=" + fund + ", function=" + function
+				+ ", department=" + department + ", functionary=" + functionary + ", scheme=" + scheme + ", subScheme="
+				+ subScheme + ", validFrom=" + validFrom + ", validTO=" + validTO + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + ", periodCycle=" + periodCycle + ", service=" + service + ", financialYear="
+				+ financialYear + ", service_catagory_id=" + service_catagory_id + "]";
+	}
 
 }
+
+*/	
+
+	
+
+
+

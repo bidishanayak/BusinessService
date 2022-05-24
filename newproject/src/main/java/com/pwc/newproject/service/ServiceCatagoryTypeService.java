@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.pwc.newproject.entity.ServiceCatagory;
 import com.pwc.newproject.entity.ServiceCatagoryType;
 import com.pwc.newproject.repository.ServiceCatagoryTypeRepository;
 
@@ -12,6 +14,26 @@ import com.pwc.newproject.repository.ServiceCatagoryTypeRepository;
 public class ServiceCatagoryTypeService {
 	@Autowired
 	ServiceCatagoryTypeRepository sctRepository;
+	//SEARCH
+	/*public String getServiceCatagoryType(Long catagoryid, Long catagoryTypeid) {
+	if (catagoryid == null)
+	{
+		return "catagoryType cannot be Blank" ;
+}else {
+	if(catagoryTypeid == null) 
+		return"please select Catagory Type";
+				
+	
+else {
+
+		return sctRepository.findById(catagoryTypeid).toString();
+		
+	
+
+}
+ }
+	}*/
+	
 
 	// CREATE
 	public ServiceCatagoryType createServiceCatagoryType(ServiceCatagoryType sct) {
@@ -68,3 +90,4 @@ public class ServiceCatagoryTypeService {
 
 	}
 }
+

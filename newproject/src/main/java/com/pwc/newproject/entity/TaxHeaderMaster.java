@@ -2,15 +2,18 @@ package com.pwc.newproject.entity;
 
 import java.util.ArrayList;
 
-import java.util.List;
+
+//simport java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,10 +25,17 @@ public class TaxHeaderMaster {
 	private Long Id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="catagory_type_id")//,referencedColumnName="id")
-	//private List<ServiceCatagoryType> typeList = new ArrayList<>();
+	@JoinColumn(name="catagory_type_id")
 	private ServiceCatagoryType sct;
+	//,referencedColumnName="id")
+	//private List<ServiceCatagoryType> typeList = new ArrayList<>();
+	//@OneToMany(targetEntity=ServiceCatagory.class, fetch = FetchType.EAGER)
+	//@OneToMany(cascade=CascadeType.ALL,targetEntity=ServiceCatagory.class)// fetch = FetchType.EAGER)
+	//@JoinColumn(name="catagory_id")
 	
+	//private ServiceCatagory sc;
+	@Column(name = "catagoryId")
+	private Long catagoryId;
 	
 	@Column(name = "Catagory")
 	private String Catagory;
