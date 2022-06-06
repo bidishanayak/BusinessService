@@ -1,8 +1,9 @@
 package com.pwc.newproject.entity;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,32 +11,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 @Entity
-@Table(name = "Service_catagory_type")
-public class ServiceCatagoryType {
+@Table(name = "Service_category_type")
+public class ServiceCategoryType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long typeId;
 
-	@OneToMany(targetEntity=ServiceCatagory.class, fetch = FetchType.EAGER)
-	@JoinColumn(name="catagory_id")
-	//@JoinColumn(name = "catagory_id")
-	//@JsonIgnoreProperties("typeList")
-	//@Column(name = "catagory_id")
-	private List<ServiceCatagory> List = new ArrayList<>();
-
+	@OneToMany(targetEntity=ServiceCategory.class, fetch = FetchType.EAGER)
+	@JoinColumn(name="category_id")
 	
+	private List<ServiceCategory> List = new ArrayList<>();
+	@Column(name= "CreatedBy")
+    private String createdBy;
 	
-	//@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	//@ManyToMany(fetch = FetchType.EAGER, mappedBy = "ServiceCatagoryType", cascade = CascadeType.ALL)
-	//@JsonIgnoreProperties("typeList")
-	//private List <TaxHeaderMaster> master = new ArrayList<>();
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name= "CreatedDate")
+    private Date createdDate; //= new Date(System.currentTimeMillis());
 	
+    @Column(name= "UpdatedBy")
+    private String updatedBy;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name= "UpdatedDate")
+    private Date updatedDate; //= new Date(System.currentTimeMillis());
 	
 	@Column(name = "Code")
 	private String code;
@@ -54,10 +59,13 @@ public class ServiceCatagoryType {
 
 	@Column(name = "functionary")
 	private String functionary;
+	
 	@Column(name = "scheme")
 	private String scheme;
+	
 	@Column(name = "subScheme")
 	private String subScheme;
+	
 	@Column(name = "validFrom")
 	private Long validFrom;
 
@@ -76,16 +84,15 @@ public class ServiceCatagoryType {
 
 	@Column(name = "service")
 	private String service;
-	// private String code;
+	
 
 	@Column(name = "financialYear")
 	private String financialYear;
 
-	@Column(name = "service_catagory_id")
-	private Long service_catagory_id;
+	@Column(name = "service_category_id")
+	private Long service_category_id;
 
-	//private ServiceCatagory catagory;
-
+	
 	public Long getTypeId() {
 		return typeId;
 	}
@@ -94,12 +101,7 @@ public class ServiceCatagoryType {
 		this.typeId = typeId;
 	}
 
-	/*
-	 * public ServiceCatagory getCatagory() { return catagory; }
-	 * 
-	 * public void setCatagory(ServiceCatagory catagory) { this.catagory = catagory;
-	 * }
-	 */
+	
 
 	public String getCode() {
 		return code;
@@ -221,29 +223,76 @@ public class ServiceCatagoryType {
 		this.financialYear = financialYear;
 	}
 
-	public Long getService_catagory_id() {
-		return service_catagory_id;
+	public Long getService_category_id() {
+		return service_category_id;
  }
 
-	public void setService_catagory_id(Long service_catagory_id) {
-		this.service_catagory_id = service_catagory_id;
-	}
-	}
-
-	/*@Override
-	public String toString() {
-		return "ServiceCatagoryType [typeId=" + typeId + ", List=" + List + ", code=" + code
-				+ ", voucherCreationEnabled=" + voucherCreationEnabled + ", fund=" + fund + ", function=" + function
-				+ ", department=" + department + ", functionary=" + functionary + ", scheme=" + scheme + ", subScheme="
-				+ subScheme + ", validFrom=" + validFrom + ", validTO=" + validTO + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + ", periodCycle=" + periodCycle + ", service=" + service + ", financialYear="
-				+ financialYear + ", service_catagory_id=" + service_catagory_id + "]";
+	public void setService_category_id(Long service_category_id) {
+		this.service_category_id = service_category_id;
+		
+		
 	}
 
-}
+	/**
+	 * @return the createdBy
+	 */
+	public String getCreatedBy() {
+		return createdBy;
+	}
 
-*/	
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
 
+	/**
+	 * @return the createdDate
+	 */
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * @param createdDate the createdDate to set
+	 */
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	/**
+	 * @return the updatedBy
+	 */
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	/**
+	 * @param updatedBy the updatedBy to set
+	 */
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	/**
+	 * @return the updatedDate
+	 */
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	/**
+	 * @param updatedDate the updatedDate to set
+	 */
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
+	
+	}
+
+	
 	
 
 

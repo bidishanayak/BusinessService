@@ -1,17 +1,31 @@
 package com.pwc.newproject.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.stereotype.Service;
-
 import com.pwc.newproject.entity.TaxHeaderMaster;
 import com.pwc.newproject.repository.TaxHeaderMasterRepository;
 
 @Service
-public class TaxHeaderMasterService {// <TaxHeaderMasterRepository> {
+public class TaxHeaderMasterService {
+	
+	@CreatedBy
+	private String createdBy;
+	
+	@CreatedDate
+	private Date createDate;
+	
+	@LastModifiedBy
+	private String updatedBy;
+	
+	@LastModifiedDate
+	private Date updateDate;
+
 
 	@Autowired
 	TaxHeaderMasterRepository taxHeaderMasterRepository;
@@ -24,82 +38,22 @@ public class TaxHeaderMasterService {// <TaxHeaderMasterRepository> {
 	// CREATE
 
 	public TaxHeaderMaster createTaxHeaderMaster(TaxHeaderMaster thm) {
+		
+		Date createdDate = new Date(System.currentTimeMillis());
 		return taxHeaderMasterRepository.save(thm);
 
 	}
 	// READ
 
-	/*
-	 * public TaxHeaderMaster getTaxHeaderMaster(Long taxHeaderMasterId) {
-	 * TaxHeaderMaster taxHeadMaster = null; try { taxHeadMaster =
-	 * taxHeaderMasterRepository.findById(taxHeaderMasterId); } return
-	 * 
-	 * }
-	 */
-
-	// public List<TaxHeaderMaster> getTaxHeaderMaster(Long taxHeaderMasterId) {
-	/*
-	 * List<TaxHeaderMaster> taxHeadMasters = new ArrayList<>(); try {
-	 * //TaxHeaderMaster taxHeadMaster =
-	 * taxHeaderMasterRepository.findById(taxHeaderMasterId);
-	 * Optional<TaxHeaderMaster> taxHeadMaster =
-	 * Optional.ofNullable(taxHeaderMasterRepository.findById(taxHeaderMasterId));
-	 * taxHeadMasters.add(taxHeadMaster); }catch(Exception e){ e.printStackTrace();
-	 * } return taxHeadMasters;
-	 */
-	// return taxHeaderMasterRepository.findAll();
-	// }
 	public TaxHeaderMaster getTaxHeaderMasterById(Long id) {
 		return taxHeaderMasterRepository.getOne(id);
 	}
 
-	// DELETE
-
-	public void deleteTaxHeaderMaster(Long taxHeaderMasterId) {
-		taxHeaderMasterRepository.deleteById(taxHeaderMasterId);
-	}
-
-	// UPDATE
+    // UPDATE
 	public TaxHeaderMaster updateTaxHeaderMaster(TaxHeaderMaster detailstaxHeaderMaster) {
-		// Long taxHeaderMasterId
-		/*
-		 * TaxHeaderMaster thm =
-		 * taxHeaderMasterRepository.findById(taxHeaderMasterId).get();
-		 * 
-		 * thm.setCatagory(DetailstaxHeaderMaster.getCatagory());
-		 * 
-		 * thm.setService(DetailstaxHeaderMaster.getService());
-		 * 
-		 * thm.setName(DetailstaxHeaderMaster.getName());
-		 * 
-		 * thm.setCode(DetailstaxHeaderMaster.getCode());
-		 * 
-		 * thm.setDabit(DetailstaxHeaderMaster.isDabit());
-		 * 
-		 * thm.setActualDemand(DetailstaxHeaderMaster.isActualDemand());
-		 * 
-		 * thm.setTaxHeadOrder(DetailstaxHeaderMaster.getTaxHeadOrder());
-		 * 
-		 * thm.setRequire(DetailstaxHeaderMaster.isRequire());
-		 * 
-		 * thm.setBillingServiceCode(DetailstaxHeaderMaster.getBillingServiceCode());
-		 * 
-		 * thm.setTaxHead(DetailstaxHeaderMaster.getTaxHead());
-		 * 
-		 * thm.setGlCode(DetailstaxHeaderMaster.getGlCode());
-		 * 
-		 * thm.setValidFrom(DetailstaxHeaderMaster.getValidFrom());
-		 * 
-		 * thm.setValidTo(DetailstaxHeaderMaster.getValidTo());
-		 * 
-		 * thm.setServiceCatagoryTypeId(DetailstaxHeaderMaster.getServiceCatagoryTypeId(
-		 * ));
-		 * 
-		 */
+		Date createdDate = new Date(System.currentTimeMillis());
 
 		return taxHeaderMasterRepository.save(detailstaxHeaderMaster);
-
-		// sct.setCatagory(DetailsServiceCatagoryType.getCatagory());
 
 	}
 
@@ -108,7 +62,7 @@ public class TaxHeaderMasterService {// <TaxHeaderMasterRepository> {
 		if (catagoryId == null) {
 			return "catagoryId cannot be Blank";
 		} else {
-			return taxHeaderMasterRepository.findByCatagoryId(catagoryId);
+			return taxHeaderMasterRepository.findByCategoryId(catagoryId);
 		}
 	}
 
@@ -117,7 +71,7 @@ public class TaxHeaderMasterService {// <TaxHeaderMasterRepository> {
 		if (catagoryTypeid == null) {	
 			return "please select catagory Type";
 		} else {
-			return taxHeaderMasterRepository.findByCatagoryTypeId(catagoryTypeid);
+			return taxHeaderMasterRepository.findByCategoryTypeId(catagoryTypeid);
 		}
 	}
 
@@ -131,8 +85,47 @@ public class TaxHeaderMasterService {// <TaxHeaderMasterRepository> {
 				return false;
 			} else {
 				return true;
-				//return thm == code;
+				}
 			}
 		}
-	}
-}
+				
+	
+			public boolean gettaxHeaderMasterFindbyName(String name) {
+				if (name == null) {
+					return false;
+				} else {
+					TaxHeaderMaster thm = taxHeaderMasterRepository.findByname(name);
+					System.out.println(thm);
+					if (thm == null) {
+						return true;
+					} else {
+						return false;
+					
+						
+					}
+					}
+					
+				}
+					public boolean gettaxHeaderMasterFindbytaxHead(String taxHead) {
+						if (taxHead == null) {
+							return false;
+						} else {
+							TaxHeaderMaster thm = taxHeaderMasterRepository.findByname(taxHead);
+							System.out.println(thm);
+							if (thm == null) {
+								return true;
+							} else {
+								return false;
+								
+							}
+						}
+						
+						}
+				}
+			
+			
+			
+		
+		
+	
+

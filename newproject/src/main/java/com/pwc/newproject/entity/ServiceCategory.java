@@ -1,42 +1,46 @@
 package com.pwc.newproject.entity;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-//import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "service_catagory")
-public class ServiceCatagory {
+@Table(name = "service_category")
+public class ServiceCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 
-	//@OneToMany( mappedBy = "catagory", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	//@JsonIgnoreProperties("catagory")
-	//@JoinColumn(name = "catagory_type_id", referencedColumnName = "typeId")
-	//@Column(name = "catagory_type_id")
-	@OneToMany(targetEntity=ServiceCatagoryType.class,cascade = CascadeType.PERSIST)
+	@OneToMany(targetEntity=ServiceCategoryType.class,cascade = CascadeType.PERSIST)
 	@JoinColumn(name="catagory_type_id",referencedColumnName="id")
-	private List<ServiceCatagoryType> typeList = new ArrayList<>();
+	private List<ServiceCategoryType> typeList = new ArrayList<>();
+	@Column(name= "CreatedBy")
+    private String createdBy;
 	
-  // @Column(name = "tax_header_master")
-   // private Long taxheadermaster;
+    @Temporal(TemporalType.TIMESTAMP)
+    
+    @Column(name= "CreatedDate")
+    private Date createdDate; //= new Date(System.currentTimeMillis());
 	
-   
+    @Column(name= "UpdatedBy")
+    private String updatedBy;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name= "UpdatedDate")
+    private Date updatedDate; //= new Date(System.currentTimeMillis());
+  
 	@Column(name = "business_Service")
 	private String businessService;
 
@@ -58,11 +62,11 @@ public class ServiceCatagory {
 	@Column(name = "type")
 	private String type;
 
-	public List<ServiceCatagoryType> getTypeList() {
+	public List<ServiceCategoryType> getTypeList() {
 		return typeList;
 	}
 
-	public void setTypeList(List<ServiceCatagoryType> typeList) {
+	public void setTypeList(List<ServiceCategoryType> typeList) {
 		this.typeList = typeList;
 	}
 
@@ -125,11 +129,69 @@ public class ServiceCatagory {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		this.Id = id;
+		this.id = id;
 	}
+
+	/**
+	 * @return the createdBy
+	 */
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	/**
+	 * @param createdBy the createdBy to set
+	 */
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * @return the createdDate
+	 */
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * @param createdDate the createdDate to set
+	 */
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	/**
+	 * @return the updatedBy
+	 */
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	/**
+	 * @param updatedBy the updatedBy to set
+	 */
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	/**
+	 * @return the updatedDate
+	 */
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	/**
+	 * @param updatedDate the updatedDate to set
+	 */
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
+	
 
 }
